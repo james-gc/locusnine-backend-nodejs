@@ -20,18 +20,20 @@ exports.new = function(req, res) {
   var user = new User();
   console.log("user new :: ", req.body, user);
   user.name = req.body.name ? req.body.name : user.name;
-  user.gender = req.body.gender;
   user.email = req.body.email;
   user.active = req.body.active;
   user.phone = req.body.phone;
+  user.role = req.body.role;
+
   // save the user and check for errors
-  user.save(function(err) {
-    // if (err)
-    //     res.json(err);
-    res.json({
-      message: "New user created!",
-      data: user
-    });
+  user.save(function(err, userResponse) {
+    if (err) res.json(err);
+    else {
+      res.json({
+        message: "New user created!",
+        data: userResponse
+      });
+    }
   });
 };
 // Handle view user info
@@ -49,9 +51,11 @@ exports.update = function(req, res) {
   User.findById(req.params.user_id, function(err, user) {
     if (err) res.send(err);
     user.name = req.body.name ? req.body.name : user.name;
-    user.gender = req.body.gender;
     user.email = req.body.email;
+    user.active = req.body.active;
     user.phone = req.body.phone;
+    user.role = req.body.role;
+  
     // save the user and check for errors
     user.save(function(err) {
       if (err) res.json(err);

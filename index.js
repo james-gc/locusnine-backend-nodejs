@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/locusnine', { useNewUrlParser: true});
+mongoose.connect('mongodb://127.0.0.1:27017/locusnine', { useNewUrlParser: true});
 var db = mongoose.connection;
 
 // Added check for DB connection
